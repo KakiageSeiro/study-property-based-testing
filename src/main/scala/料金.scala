@@ -20,7 +20,7 @@ case class 料金(上限値: Option[Int], アカウントあたりの価格: Mon
 case class 料金List(values: List[料金]) {
   def 上限値List = values.flatMap(_.上限値)
 
-  assert(values.nonEmpty,                    "ティアは必ず一つ以上")
+  assert(values.nonEmpty,                    "料金は必ず一つ以上")
   assert(values.last.上限値.isEmpty,          "最後は上限値なし")
   assert(values.count(_.上限値.isEmpty) == 1, "上限値なしは一つだけ")
   assert(上限値List.distinct == 上限値List,    "上限値は重複しない")
