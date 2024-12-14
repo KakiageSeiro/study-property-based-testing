@@ -8,7 +8,13 @@
 // 250人未満 / 250円
 // 上限なし  / 300円
 
-case class Money(value: Int)
+
+opaque type Money = Int
+object Money {
+  def apply(value: Int): Money = value
+  def value(m: Money): Int = m
+}
+
 case class 料金(上限値: Option[Int], アカウントあたりの価格: Money)
 
 case class 料金List(values: List[料金]) {
