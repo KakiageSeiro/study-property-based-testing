@@ -8,19 +8,17 @@
 // 250人未満 / 250円
 // 上限なし  / 300円
 
-// opaque type Money : Int
-
 case class Money(value: Int)
 case class 料金(上限値: Option[Int], アカウントあたりの価格: Money)
 
 case class 料金List(values: List[料金]) {
   def 上限値List = values.flatMap(_.上限値)
 
-  assert(values.nonEmpty,              "ティアは必ず一つ以上")
-  assert(values.last.上限値.isEmpty,    "最後は上限値なし")
+  assert(values.nonEmpty,                    "ティアは必ず一つ以上")
+  assert(values.last.上限値.isEmpty,          "最後は上限値なし")
   assert(values.count(_.上限値.isEmpty) == 1, "上限値なしは一つだけ")
-  assert(上限値List.distinct == 上限値List, "上限値は重複しない")
-  assert(上限値List.sorted == 上限値List,   "上限値でソートされている")
+  assert(上限値List.distinct == 上限値List,    "上限値は重複しない")
+  assert(上限値List.sorted == 上限値List,      "上限値でソートされている")
 }
 
 
