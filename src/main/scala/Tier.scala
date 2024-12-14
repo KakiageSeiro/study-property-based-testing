@@ -8,9 +8,9 @@
 // 250人未満 / 250円
 // 上限なし  / 300円
 
-opaque type Money : Int
+// opaque type Money : Int
 
-// case class Money(value: Int)
+case class Money(value: Int)
 case class Tier(upperLimit: Option[Int], pricePerAccount: Money) {
   def isEmpty: Boolean = true
 }
