@@ -10,16 +10,16 @@
 
 opaque type Money : Int
 
-case class 料金(上限値: Option[Int], アカウントあたりの価格: Money)
+case class Tier(upperLimit: Option[Int], pricePerAccount: Money)
 
-case class 料金List(values: List[料金]) {
-  def 上限値List = values.flatMap(_.上限値)
+case class Tiers(values: List[Tier]) {
+  def upperLimits = values.flatMap(_.upperLimit)
 
   assert(values.nonEmpty,              "ティアは必ず一つ以上")
-  assert(values.last.上限値.isEmpty,    "最後は上限値なし")
+  assert(values.last.upperLimit.isEmpty,    "最後は上限値なし")
   assert(values.count(_.isEmpty) == 1, "上限値なしは一つだけ")
-  assert(values.distinct == 上限値List, "上限値は重複しない")
-  assert(values.sorted == 上限値List,   "上限値でソートされている")
+  assert(values.distinct == upperLimits, "上限値は重複しない")
+  assert(values.sorted == upperLimits,   "上限値でソートされている")
 }
 
 
