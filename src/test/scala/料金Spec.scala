@@ -3,11 +3,8 @@ import org.scalacheck.Prop.forAll
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.must.Matchers.{be, noException}
 import org.scalatest.matchers.should.Matchers
-import org.scalatest.matchers.should.Matchers.shouldBe
 import org.scalatest.propspec.AnyPropSpec
 import org.scalatestplus.scalacheck.Checkers
-
-import scala.util.{Random, Try}
 
 // いままでは振る舞い駆動スタイルのAnyFlatSpecをつかってたけど、もっとシンプルっぽいAnyFunSuiteを使ってみる
 class 料金Spec extends AnyFunSuite with Matchers {
@@ -131,6 +128,9 @@ class 料金Spec extends AnyFunSuite with Matchers {
   }
 }
 
+// -----------------------------------------------------------------------------------------------------------------------
+
+
 
 // プロパティベースドテスト
 // 狙ったテストデータを作るジェネレータを定義→forAllの内部で検証する条件を指定
@@ -216,7 +216,7 @@ class 料金Spec2 extends AnyPropSpec with Checkers {
 
   // -----------------------------------------------------------------------------------------------------------------------
   // プロパティはテスト対象のあるべき姿みたいな。たとえば、料金は"上限値でソートされている"というプロパティを持っているのような感じだと思う
-  // forAllはProp(プロパティ)を返す。第２引数で
+  // forAllはProp(プロパティ)を返す。第２引数でBooleanを返す関数を受け取る
 
   property("有効な料金リストは正常に構築されるべき") {
     forAll(genValid料金List) { prices =>
@@ -226,8 +226,7 @@ class 料金Spec2 extends AnyPropSpec with Checkers {
     }
   }
 
-  // 無効な料金リストはAssertionErrorを投げるべき
-  property("Invalid 料金List should throw AssertionError") {
+  property("無効な料金リストはAssertionErrorを投げるべき") {
     forAll(genInvalid料金List) { case (description, prices) =>
       val result = scala.util.Try(料金List(prices))
       result.isFailure && result.failed.get.isInstanceOf[AssertionError]
