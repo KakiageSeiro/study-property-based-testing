@@ -138,7 +138,7 @@ class 料金2Spec2 extends AnyPropSpec with Checkers {
   val genMoney2: Gen[Money2] = Gen.choose(1, 10000).map(Money2(_))
 
   val gen料金2: Gen[料金2] = for {
-    upperLimit <- Gen.option(Gen.choose(1, 9999))
+    upperLimit <- Gen.choose(1, 9999)
     price      <- genMoney2
   } yield 料金2(上限値 = upperLimit, アカウントあたりの価格 = price)
 
