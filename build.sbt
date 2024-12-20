@@ -11,3 +11,6 @@ libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.19" % Test
 
 // プロパティベースドテストのライブラリ
 libraryDependencies += "org.scalatestplus" %% "scalacheck-1-18" % "3.2.19.0" % "test"
+
+// 篩型のライブラリ
+libraryDependencies += "io.github.iltotore" %% "iron" % "2.6.0"
